@@ -1,45 +1,51 @@
-:css
-  thead {
-    font-weight: bold;
-  }
-  table, td {
-   border: 1px solid;
-  }
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap-theme.min.css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
 
-%form
-  %input{name: 'recipe_url', placeholder: 'recipe url'}
-  %input{type: 'submit', value: 'parse recipe'}
-
-- if recipe
-  %div#parsed_recipe
+.container
+  .page-header
     %h1
-      General Info ( parsed by
+      Live demo for
       %a{href: 'http://github.com/iancanderson/hangry'} hangry
-      )
-    %table
-      %thead
-        %td Attribute
-        %td Value
-      - recipe.each_pair do |attribute, value|
-        %tr
-          %td= attribute
-          %td= value.to_s
-
-    %h1
-      Ingredient additions ( parsed by
+      and
       %a{href: 'http://github.com/iancanderson/ingreedy'} ingreedy
-      )
+      gems
 
-    %table
-      %thead
-        %td{style: 'width: 40%'} Addition
-        %td{style: 'width: 15%'} Parsed Amount
-        %td{style: 'width: 15%'} Parsed Unit
-        %td{style: 'width: 30%'} Parsed Ingredient
-      - parsed_ingredients.each do |addition, parsed|
-        %tr
-          %td= addition
-          %td= parsed.amount
-          %td= parsed.unit
-          %td= parsed.ingredient
+  %form
+    %label{for: 'recipe_url', class: 'sr-only'} recipe url
+    %input{name: 'recipe_url', placeholder: 'recipe url'}
+    %input{type: 'submit', value: 'parse recipe'}
+
+  - if recipe
+    %div#parsed_recipe
+      %h2
+        General Info ( parsed by
+        %a{href: 'http://github.com/iancanderson/hangry'} hangry
+        )
+      %table.table-bordered.table-hover
+        %thead
+          %td Attribute
+          %td Value
+        - recipe.each_pair do |attribute, value|
+          %tr
+            %td= attribute
+            %td= value.to_s
+
+      %h2
+        Ingredient additions ( parsed by
+        %a{href: 'http://github.com/iancanderson/ingreedy'} ingreedy
+        )
+
+      %table.table-bordered.table-hover
+        %thead
+          %td{style: 'width: 40%'} Addition
+          %td{style: 'width: 15%'} Parsed Amount
+          %td{style: 'width: 15%'} Parsed Unit
+          %td{style: 'width: 30%'} Parsed Ingredient
+        - parsed_ingredients.each do |addition, parsed|
+          %tr
+            %td= addition
+            %td= parsed.amount
+            %td= parsed.unit
+            %td= parsed.ingredient
 
