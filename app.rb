@@ -20,5 +20,8 @@ get '/' do
     parse_recipe(params[:recipe_url])
   end
 
-  haml :app, locals: { recipe: @recipe, parsed_ingredients: @parsed_ingredients }
+  render json: @recipe
+  #render json: @parsed_ingredients
+
+  #haml :app, locals: { recipe: @recipe, parsed_ingredients: @parsed_ingredients }
 end
