@@ -19,9 +19,10 @@ end
 get '/' do
   if params[:recipe_url]
     parse_recipe(params[:recipe_url])
+    render json: @recipe
   end
 
-  #render json: @recipe
+  
   #render json: @parsed_ingredients
 
   haml :app, locals: { recipe: @recipe, parsed_ingredients: @parsed_ingredients }
