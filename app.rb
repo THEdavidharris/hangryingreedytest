@@ -19,7 +19,8 @@ end
 get '/' do
   if params[:recipe_url]
     parse_recipe(params[:recipe_url])
-    puts @recipe.to_json
+    puts @parsed_ingredients
+    puts @parsed_ingredients
   end
 
   
