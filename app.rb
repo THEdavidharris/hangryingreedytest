@@ -2,6 +2,7 @@ require 'hangry'
 require 'ingreedy'
 require 'open-uri'
 require 'sinatra'
+require 'json'
 
 def parse_recipe(recipe_url)
   recipe_html_string = open(recipe_url).read
