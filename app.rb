@@ -19,7 +19,7 @@ end
 get '/' do
   if params[:recipe_url]
     parse_recipe(params[:recipe_url])
-    render json: @recipe
+    puts @recipe.to_s
   end
 
   
