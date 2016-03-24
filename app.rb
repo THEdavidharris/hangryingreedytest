@@ -15,16 +15,24 @@ def parse_recipe(recipe_url)
   end
 end
 
-
 get '/' do
   if params[:recipe_url]
     parse_recipe(params[:recipe_url])
-    puts @recipe
-    puts @parsed_ingredients
+    @ingreds ||= []
+    @parsed_ingredients.each { |x, parsed| 
+        ingredientHash = {
+            :fullString => x.to_s, 
+            :amount => parsed.amount.to_s,
+            :unit => parsed.unit.to_s,
+            :ingredient => parsed.ingredient.to_s   
+        }
+        @ingreds.push(ingredientHash)
+    }
+     
+    content_type :json
+    @ingreds.to_json    
+ 
+  else
+    haml :app, locals: { recipe: @recipe, parsed_ingredients: @parsed_ingredients }
   end
-
-  
-  #render json: @parsed_ingredients
-
-  haml :app, locals: { recipe: @recipe, parsed_ingredients: @parsed_ingredients }
 end
